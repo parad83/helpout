@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% load custom_tags %}
+
+{% block content %}
+
+<div class="inner">
+    <h2 class="py-4"><strong>Add post</strong></h2>
+    <form class="add-post overflow-hidden" action="" enctype="multipart/form-data" method="POST" novalidate>{% csrf_token %}
+        <div class="row gy-5">
+            <div class="col-md-7 col-12 main-col">
+                <div class="px-5 pb-5 pt-3 columns">
+                    <label class="input-title">Photo</label>
+                    <div class="d-flex align-items-center justify-content-center image-input mx-auto d-block">
+                        <span class="fs-1 align-middle">
+                            +
+                        </span>
+                    </div>
+                    <div class="visually-hidden">
+                        {{ context.form.image }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-12 main-col">
+                <div class="p-3 columns overflow-auto">
+                    <div class="pb-3">
+                        <label class="input-title">Category in which the post is displayed</label>
+                        <input class="form-control p-2 border-0" value="{{ context.post.category }}" disabled>
+                    </div>
+                    <div class"pb-3">
+                        <label class="input-title">Title for the post</label>
+                        <input class="form-control p-2 border-0" value="{{ context.post.title }}" disabled>
+                    </div>
+                    <div class="pt-3">
+                        <label class="input-title" for="{{ form.text.id_for_label }}">Description for what You look for/You can offer</label>
+                        {{ context.form.text }}
+                        <span class="invalid-feedback d-block ps-1">{{ context.form.text.errors|striptags }}</span>
+                    </div>
+                    <div class="py-3">
+                        <label class="input-title">Area in which You operate</label>
+                        <input class="form-control p-2 border-0" value="{{ context.post.area }}" disabled>
+                        <div id="area-results w-100">
+                            <ul id="area-results-list" class="list-group text-start"></ul>
+                            <ul id="area-init-results-list" class="list-group text-start" style="overflow: scroll; height: 40%;">
+                                <li class="list-group-item border-bottom-3">
+                                    <strong> Cała Polska </strong>
+                                </li>
+                                <li class="list-group-item">
+                                    Dolnośląskie
+                                </li>
+                                <li class="list-group-item">
+                                    Kujawsko-pomorskie
+                                </li>
+                                <li class="list-group-item">
+                                    Lubelskie
+                                </li>
+                                <li class="list-group-item">
+                                    Lubuskie
+                                </li>
+                                <li class="list-group-item">
+                                    Łódzkie
+                                </li>
+                                <li class="list-group-item">
+                                    Małopolskie
+                                </li>
+                                <li class="list-group-item">
+                                    Mazowieckie
+                                </li>
+                                <li class="list-group-item">
+                                    Opolskie
+                                </li>
+                                <li class="list-group-item">
+                                    Podkarpackie
+                                </li>
+                                <li class="list-group-item">
+                                    Podlaskie
+                                </li>
+                                <li class="list-group-item">
+                                    Pomorskie
+                                </li>
+                                <li class="list-group-item">
+                                    Śląskie
+                                </li>
+                                <li class="list-group-item">
+                                    Świętokrzyskie
+                                </li>
+                                <li class="list-group-item">
+                                    Warmińsko-mazurskie
+                                </li>
+                                <li class="list-group-item">
+                                    Wielkopolskie
+                                </li>
+                                <li class="list-group-item">
+                                    Zachodniopomorskie
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button type="submit" class="button py-2 px-3 float-start">Change</button>
+                    <a href="{% url 'delete-post' context.post.id %}" type="submit" class="button-delete py-2 px-3">Delete</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<script>
+    $('.image-input').css('background-image', 'url({{ '/media/'|addstr:context.post.image }})');
+    $('#radio-select label').addClass('pe-3');
+</script>
+{% endblock script %}

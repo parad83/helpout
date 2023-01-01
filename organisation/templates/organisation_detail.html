@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load custom_tags %}
+
+{% block content %}
+
+
+<div>
+    <hr>
+    <h1> {{ context.organisation.name }} </h1>
+    <p> {{ context.organisation.biography }} </p>
+    <a href="{{ context.organisation.website }}"> {{ context.organisation.website }} </a>
+    <img src="{{ '/media/'|addstr:context.organisation.image }}" style="width: 100px">
+    <hr>
+
+    <form method="post"> 
+        {% csrf_token %}
+        {{ context.form.as_p }}
+        <input type="submit" value="Send">
+    </form>
+</div>
+
+
+
+{% endblock content %}

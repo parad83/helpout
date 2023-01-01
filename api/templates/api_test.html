@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        {% comment %} <script src="https://unpkg.com/axios/dist/axios.min.js"></script> {% endcomment %}
+    </head>
+    <body>
+        <div id="demo">
+            <input type="text" id="searchField">
+            {% comment %} <p>Let AJAX change this text.</p> {% endcomment %}
+            {% comment %} <button type="button" onclick="loadDoc()">Change Content</button> {% endcomment %}
+            <p id="display">
+
+            </p>
+            <ul id="results-list" >
+            </ul>
+
+        </div>
+
+        <script>
+
+            {% comment %} import axios from 'axios'; {% endcomment %}
+            {% comment %} var axios = require('axios'); {% endcomment %}
+
+            $('#searchField').keyup(function() {
+                $("#results-list").empty();
+                var search = $(this).val();
+                $.getJSON(`/api/data/?q=${search}`, function(data){
+                    $.each(data.predictions, function( index, value ) {
+                        console.log(value.description)
+                        list = $("<li></li>").text((index+1) + ". " + value.description);
+                        $("#results-list").append(list);
+                    }); 
+                });
+                $("#results-list").empty();
+            })
+
+        </script>
+    </body>
+</html>

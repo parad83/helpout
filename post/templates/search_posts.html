@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+{% load custom_tags %}
+{% load humanize %}
+
+{% block content %}
+
+<div class="inner mb-5">
+    <div class="text-center">
+        <form class="p-4 pb-0 row" method="GET">
+            <div class="col-md-7 col-8 px-1">
+                <input type="search" name="search" class="p-3 w-100 rounded-0 search-input" value="{% if request.GET.search %}{{ request.GET.search }}{% endif %}" placeholder="I'm looking for..." aria-label="Search" maxlength="100" id="search" onfocus="this.value=''">
+                <ul id="search-results-list" class="list-group position-relative text-start"></ul>
+            </div>
+            <div class="col-md-3 px-1 d-none d-md-block">
+                <input type="text" name="area" class="p-3 w-100 rounded-0 search-input" value="{% if request.GET.area %}{{ request.GET.area }}{% endif %}" placeholder="Where?" id="area" onfocus="this.value=''">
+                <div id="area-results">
+                    <ul id="area-results-list" class="list-group text-start"></ul>
+                    <ul id="area-init-results-list" class="list-group text-start">
+                        <li class="list-group-item border-bottom-3">
+                            <strong> Cała Polska </strong>
+                        </li>
+                        <li class="list-group-item">
+                            Dolnośląskie
+                        </li>
+                        <li class="list-group-item">
+                            Kujawsko-pomorskie
+                        </li>
+                        <li class="list-group-item">
+                            Lubelskie
+                        </li>
+                        <li class="list-group-item">
+                            Lubuskie
+                        </li>
+                        <li class="list-group-item">
+                            Łódzkie
+                        </li>
+                        <li class="list-group-item">
+                            Małopolskie
+                        </li>
+                        <li class="list-group-item">
+                            Mazowieckie
+                        </li>
+                        <li class="list-group-item">
+                            Opolskie
+                        </li>
+                        <li class="list-group-item">
+                            Podkarpackie
+                        </li>
+                        <li class="list-group-item">
+                            Podlaskie
+                        </li>
+                        <li class="list-group-item">
+                            Pomorskie
+                        </li>
+                        <li class="list-group-item">
+                            Śląskie
+                        </li>
+                        <li class="list-group-item">
+                            Świętokrzyskie
+                        </li>
+                        <li class="list-group-item">
+                            Warmińsko-mazurskie
+                        </li>
+                        <li class="list-group-item">
+                            Wielkopolskie
+                        </li>
+                        <li class="list-group-item">
+                            Zachodniopomorskie
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2 col-4 px-1 mx-auto">
+                <input class="button rounded-0 w-100 p-3" type="submit" value="Search" id="search-button">
+            </div>
+        </form>
+    </div>
+</div>
+<div class="inner py-3 categories-list">
+    <div class="row justify-content-start">
+        {% for c in context.categories%}
+        <div class="col text-center">
+            <div class="category-list-name">
+                <span id="category-list-name">{{ c }}</span>
+                <span class="category-list-count">{{ c.posts_count }}</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% comment %} <div class="mt-1 float-start" id="reset-category">Reset category <i class="bi bi-x-lg"></i></div> {% endcomment %}
+</div>
+<div class="sort-posts-page mb-2 py-3">
+    <div class="inner row m-0 my-1 sort-inner-page text-center">
+        <div class="col px-0">
+            <label>Filter through posts...</label>
+            {{ context.type_form }}
+        </div>
+        <div class="col px-0">
+            <label>Sort by:</label>
+            {{ context.sort_form }}
+        </div>
+    </div>
+</div>
+<div class="inner">
+    <div class="reset-filters">
+        <label>Reset filters</label>
+        <i class="bi bi-x-lg"></i>
+    </div>
+</div>
+<div class="inner">
+    <div class="text-center mb-2">
+        We found {{ context.post_count }} results 😎
+    </div>
+    <div class="post-page-posts row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-2 g-3">
+        {% for p in context.posts %}
+        <div class="col text-center">
+            {% if p.visible %}
+            {% if p.image %}
+            <div class="post-col text-start rounded">
+                <div>
+                    <img class='w-100' src="{{ '/media/'|addstr:p.image }}">
+                </div>
+                <div class="p-2 post-col-grid">
+                    <div class="post-col-title"><a href="{% url 'post-details' p.id %}">{{ p.title }}</a></div>
+                    <div class="row justify-content-between w-100 m-0 mt-auto">
+                        <div class="col-6 p-0">
+                            <div class="post-col-foot text-start"> {{ p.area }} </div>
+                        </div>
+                        <div class="col-6 p-0">
+                            <div class="post-col-foot text-end"> {{ p.date_created|time_since }} </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="post-col text-start rounded">
+                <div class="p-2 post-col-grid">
+                    <div class="post-col-title"><a href="{% url 'post-details' p.id %}">{{ p.title }}</a></div>
+                    <div class="post-col-info text-break pb-3">{{ p.text|truncatechars:150 }}</div>
+                    <div class="row justify-content-between w-100 m-0 mt-auto">
+                        <div class="col-6 p-0">
+                            <div class="post-col-foot text-start mb-0"> {{ p.area }} </div>
+                        </div>
+                        <div class="col-6 p-0">
+                            <div class="post-col-foot text-end mb-0"> {{ p.date_created|time_since }} </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="my-3">
+        <div class="pagination-nav w-100">
+            <div class="pagination-prev">
+                {% if context.posts.has_previous %}
+                <span id="prev-page">Previous</span>
+                {% endif %}
+            </div>
+            <div class="pagination-mid">
+                {{ context.posts.number }} of {{ context.posts.paginator.num_pages }}
+            </div>
+            <div class="pagination-next">
+                {% if context.posts.has_next %}
+                <span id="next-page">Next</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<script>
+    let searchParams = new URLSearchParams(window.location.search);
+
+    {% comment %} $('#type-input').prepend($('<option>', {
+        value: '',
+        text: '...',
+        disabled: true,
+        hidden: true,
+    })); {% endcomment %}
+
+    // disabled
+    $('.category-list-name span:first-child').on('click', function () {
+        if (searchParams.toString()) {
+            window.location.assign('/posts/' + $(this).text().toLowerCase() + '/?' + searchParams);
+        }
+        else {
+            window.location.assign('/posts/' + $(this).text().toLowerCase());
+        }
+    });
+    $('#sort-input').on('change', function () {
+        searchParams.set('sort', $('#sort-input option:selected').val());
+        window.location.assign(window.location.pathname + '?' + searchParams.toString());
+    });
+    $('#type-input').on('change', function () {
+        searchParams.set('type', $('#type-input option:selected').val());
+        window.location.assign(window.location.pathname + '?' + searchParams.toString());
+    });
+
+    // disabled
+    $('#reset-category').on('click', function () {
+        window.location.assign('/posts' + '?' + searchParams);
+    });
+
+    $('.reset-filters').on('click', function () {
+        search = searchParams.get('search');
+        area = searchParams.get('area');
+        if (search || area) {
+            window.location.assign('/posts/?' + search + area);
+        }
+        else {
+            window.location.assign('/posts/');
+        }
+    });
+    $('#prev-page').on('click', function () {
+        window.location.assign('/posts' + '?' + searchParams + '&page={% if context.posts.has_previous %}{{ context.posts.previous_page_number }}{% endif %}');
+    });
+    $('#next-page').on('click', function () {
+        window.location.assign('/posts' + '?' + searchParams + '&page={% if context.posts.has_next %}{{ context.posts.next_page_number }}{% endif %}');
+    });
+    {% comment %} $("#load-more").click(function (e) {
+        e.preventDefault();
+        // get the nickname
+        var nick_name = $(this).val();
+        // GET AJAX request
+        let searchParams = new URLSearchParams(window.location.search);
+        if (searchParams.has('page')) {
+            let pageNum = searchParams.get('page');
+            ++pageNum;
+            console.log(pageNum);
+            console.log(searchParams.toString());
+        };
+        $.ajax({
+            type: 'GET',
+            url: "{% url 'posts' %}?" + searchParams.toString(),
+            success: function (response) {
+                // if not valid user, alert the user
+                console.log(response)
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+    }) {% endcomment %}
+</script>
+{% endblock script %}

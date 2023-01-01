@@ -1,0 +1,160 @@
+{
+    "predictions": [
+        {
+            "description": "Auschwitz",
+            "matched_substrings": [
+                {
+                    "length": 1,
+                    "offset": 0
+                }
+            ],
+            "place_id": "ChIJMUw4T-CUFkcRvW6XMSFrHB4",
+            "reference": "ChIJMUw4T-CUFkcRvW6XMSFrHB4",
+            "structured_formatting": {
+                "main_text": "Auschwitz",
+                "main_text_matched_substrings": [
+                    {
+                        "length": 1,
+                        "offset": 0
+                    }
+                ]
+            },
+            "terms": [
+                {
+                    "offset": 0,
+                    "value": "Auschwitz"
+                }
+            ],
+            "types": [
+                "locality",
+                "political",
+                "geocode"
+            ]
+        },
+        {
+            "description": "August\u00f3w",
+            "matched_substrings": [
+                {
+                    "length": 1,
+                    "offset": 0
+                }
+            ],
+            "place_id": "ChIJjSDdCVZQ4EYRSp-KuBBvgOo",
+            "reference": "ChIJjSDdCVZQ4EYRSp-KuBBvgOo",
+            "structured_formatting": {
+                "main_text": "August\u00f3w",
+                "main_text_matched_substrings": [
+                    {
+                        "length": 1,
+                        "offset": 0
+                    }
+                ]
+            },
+            "terms": [
+                {
+                    "offset": 0,
+                    "value": "August\u00f3w"
+                }
+            ],
+            "types": [
+                "locality",
+                "political",
+                "geocode"
+            ]
+        },
+        {
+            "description": "Andrych\u00f3w",
+            "matched_substrings": [
+                {
+                    "length": 1,
+                    "offset": 0
+                }
+            ],
+            "place_id": "ChIJE8I9ySKFFkcR8vJeLeFYGq8",
+            "reference": "ChIJE8I9ySKFFkcR8vJeLeFYGq8",
+            "structured_formatting": {
+                "main_text": "Andrych\u00f3w",
+                "main_text_matched_substrings": [
+                    {
+                        "length": 1,
+                        "offset": 0
+                    }
+                ]
+            },
+            "terms": [
+                {
+                    "offset": 0,
+                    "value": "Andrych\u00f3w"
+                }
+            ],
+            "types": [
+                "locality",
+                "political",
+                "geocode"
+            ]
+        },
+        {
+            "description": "Aleksandr\u00f3w \u0141\u00f3dzki",
+            "matched_substrings": [
+                {
+                    "length": 1,
+                    "offset": 0
+                }
+            ],
+            "place_id": "ChIJgQ9ZLoW0G0cRKUnXAVg15nI",
+            "reference": "ChIJgQ9ZLoW0G0cRKUnXAVg15nI",
+            "structured_formatting": {
+                "main_text": "Aleksandr\u00f3w \u0141\u00f3dzki",
+                "main_text_matched_substrings": [
+                    {
+                        "length": 1,
+                        "offset": 0
+                    }
+                ]
+            },
+            "terms": [
+                {
+                    "offset": 0,
+                    "value": "Aleksandr\u00f3w \u0141\u00f3dzki"
+                }
+            ],
+            "types": [
+                "locality",
+                "political",
+                "geocode"
+            ]
+        },
+        {
+            "description": "Aleksandr\u00f3w Kujawski",
+            "matched_substrings": [
+                {
+                    "length": 1,
+                    "offset": 0
+                }
+            ],
+            "place_id": "ChIJYdz9e6a2HEcRITiTTbPuMBk",
+            "reference": "ChIJYdz9e6a2HEcRITiTTbPuMBk",
+            "structured_formatting": {
+                "main_text": "Aleksandr\u00f3w Kujawski",
+                "main_text_matched_substrings": [
+                    {
+                        "length": 1,
+                        "offset": 0
+                    }
+                ]
+            },
+            "terms": [
+                {
+                    "offset": 0,
+                    "value": "Aleksandr\u00f3w Kujawski"
+                }
+            ],
+            "types": [
+                "locality",
+                "political",
+                "geocode"
+            ]
+        }
+    ],
+    "status": "OK"
+}

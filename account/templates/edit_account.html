@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load custom_tags %}
+
+{% block content %}
+
+<div class="inner">
+    <h3 class="my-4">Settings</h3>
+    <form class="edit p-3" action="" enctype="multipart/form-data" method="POST" novalidate>{% csrf_token %}
+        <div class="row">
+            <div class="col-12">
+                <label>Name:</label>
+                {{ form.first_name }}
+                <span class="input-title">This is how other users will see you</span>
+                {% if form.first_name.errors %}
+                <div class="invalid-feedback d-block">{{ form.first_name.errors|striptags }}</div>
+                {% endif %}
+            </div>
+            <div class="col-12 mt-3">
+                <label>E-mail</label>
+                <input type="text" value="{{ request.user }}" disabled class="form-control">
+                <span class="input-title">This is the email that you used to create your helpOUT account</span>
+            </div>
+            <div class="col-12 row my-3">
+                <label for="{{ form.phone_number.id_for_label }}">Phone number</label>
+                <div class="col-1">
+                    {{ form.isd_code }}
+                </div>
+                <div class="col-6">
+                    {{ form.phone_number }}
+                </div>
+                <div class="col-12">
+                    {% if form.isd_code.errors %}
+                    <div class="invalid-feedback d-block">{{ form.isd_code.errors|striptags }}</div>
+                    {% endif %}
+                    {% if form.phone_number.errors %}
+                    <div class="invalid-feedback d-block">{{ form.phone_number.errors|striptags }}</div>
+                    {% endif %}
+                    {% if form.non_field_errors %}
+                    <div class="invalid-feedback d-block">{{ form.non_field_errors|striptags }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-12">
+                {{ form.display_phone }}
+                <label for="{{ form.displa_phone.id_for_label }}" class="mt-0">Show your phone number to other users</label><br>
+                <span class="input-title">Your phone number will be displayed in the details of your posts</span>
+            </div>
+        </div>
+        <button class="button-acc p-3 py-2 float-left" type="submit">Save</button>
+    </form>
+</div>
+
+{% endblock content %}

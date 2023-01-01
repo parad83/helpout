@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load custom_tags %}
+
+{% block content %}
+
+<div class="mt-4 inner">
+    {% if request.user.id == context.user.id %}
+    <h2> Welcome back {{ request.user.first_name }} 👋</h2>
+    <div>
+        <a href="{% url 'edit-account' %}">Edit information about you</a>
+    </div>
+    <hr>
+    {% endif %}
+
+    {% if request.user.can_have_organisation and not request.user.has_organisation %}
+    <div>
+        <a href="{% url 'create-organisation' %}">Create your own organisation</a>
+    </div>
+    {% elif request.user.has_organisation %}
+    <div>
+        <a href="{% url 'edit-organisation' %}">Edit your organisation</a>
+    </div>
+    <hr>
+    {% endif %}
+
+    {% if context.posts %}
+    <h4>{{ request.user.first_name }}'s posts:</h4>
+    <div class="row row-cols-md-4 row-cols-sm-2 row-cols-1 g-3 pt-2">
+        {% for p in context.posts %}
+        <div class="col text-center">
+            {% if p.visible %}
+            {% if p.image %}
+            <div class="post-col p-3 text-start rounded">
+                <img src="{{ '/media/'|addstr:p.image }}">
+                <p class="py-1 post-col-title mb-1"><a href="{% url 'post-details' p.id %}">{{ p.title|truncatechars:18 }}</a></p>
+                <div class="row justify-content-between p-1 py-2 w-100" style="position: absolute; bottom: 0">
+                    <div class="col-6 ps-2">
+                        <p class="post-col-foot text-start mb-0"> {{ p.area }} </p>
+                    </div>
+                    <div class="col-6 pe-1">
+                        <p class="post-col-foot text-end mb-0"> {{ p.time_since }} </p>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="post-col p-2 text-start rounded">
+                <p class="post-col-title mb-1"><a href="{% url 'post-details' p.id %}">{{ p.title|truncatechars:18 }}</a></p>
+                <div class="post-col-info text-break pb-3">{{ p.text|truncatechars:200 }}</div>
+                <div class="row justify-content-between p-1 py-2 w-100" style="position: absolute; bottom: 0">
+                    <div class="col-6 ps-2">
+                        <p class="post-col-foot text-start mb-0"> {{ p.area }} </p>
+                    </div>
+                    <div class="col-6 pe-1">
+                        <p class="post-col-foot text-end mb-0"> {{ p.time_since }} </p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,68 @@
+{% extends "account_base.html" %}
+
+{% block content %}
+<div class="acc-nav w-100 row mx-0 px-1" aria-label="Basic example">
+    <div class="col-6 text-center py-2 mt-1">
+        <a type="button" href="{% url 'login' %}" class="acc-element ">Login</a>
+    </div>
+    <div class="col-6 text-center py-2 acc-active mt-1">
+        <a type="button" href="{% url 'join' %}" class="acc-element">Join us</a>
+    </div>
+</div>
+<form class="acc-form p-3" method="post" novalidate>{% csrf_token %}
+    <div class="mb-3">
+        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Disabled popover">
+            <label class="input-title" for="{{ form.first_name.id_for_label }}" style="cursor: help;">      
+                Name:
+            </label>
+        </span>
+        {{ form.first_name }}
+        {% if form.first_name.errors %}
+        <div class="invalid-feedback d-block">{{ form.first_name.errors|striptags }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label class="input-title" for="{{ form.email.id_for_label }}">E-mail</label>
+        {{ form.email }}
+        {% if form.email.errors %}
+        <div class="invalid-feedback d-block">{{ form.email.errors|striptags }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label class="input-title" for="{{ form.password1.id_for_label }}">Password</label>
+        {{ form.password1 }}
+        {% if form.password1.errors %}
+        <div class="invalid-feedback d-block">{{ form.password1.errors|striptags }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label class="input-title" for="{{ form.password2.id_for_label }}">Confirm password</label>
+        {{ form.password2 }}
+        {% if form.password2.errors %}
+        {% for e in form.password2.errors %}
+        <span class="invalid-feedback d-block m-0">{{ e|striptags }}</span> <br>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <div class="form-check form-text">
+        {{ form.accepts_tos }}
+        <label class="form-check-label tos" for="{{ form.accepts_tos.id_for_label }}">I agree to <a href="#"> Terms and Conditions </a> </label>
+        {% if form.accepts_tos.errors %}
+        <div class="invalid-feedback d-block">{{ form.accepts_tos.errors|striptags }}</div>
+        {% endif %}
+    </div>
+    <hr>
+    {% if form.non_field_errors %}
+    <div class="invalid-feedback d-block">{{ form.non_field_errors|striptags }}</div>
+    {% endif %}
+    <button class="button-acc w-100 p-2" type="submit">Sign up</button>
+</form>
+
+{% endblock content %}
+
+{% block script %}
+<script>
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+</script>
+{% endblock script %}

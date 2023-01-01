@@ -1,0 +1,21 @@
+{% extends "account_base.html" %}
+
+{% block content %}
+
+<div class="p-3">
+    <h4 class="mb-3">
+        Password reset link is heading Your way 🛫
+    </h4>
+    <hr>
+    <ol class="ps-3">
+        <li class=""> Open your mailbox </li>
+        <li class=""> Find the password reset email that we sent you </li>
+        <li class=""> Click the link provided in the email </li>
+        <li class=""> Type your new password </li>
+        <li class=""> Click <strong> Submit</strong>... </li>
+    </ol>
+
+    ..and you are good to go 🙌!
+    <a href="{% url 'home' %}" class="button-acc w-100 p-2 my-3" type="submit">Return to home page</a>
+</div>
+{% endblock content %}

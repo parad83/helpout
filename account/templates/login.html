@@ -1,0 +1,35 @@
+{% extends "account_base.html" %}
+
+{% block content %}
+<div class="acc-nav w-100 row mx-0 px-1" aria-label="Basic example">
+    <div class="col-6 text-center py-2 acc-active mt-1">
+        <a type="button" href="{% url 'login' %}" class="acc-element ">Login</a>
+    </div>
+    <div class="col-6 text-center py-2 mt-1">
+        <a type="button" href="{% url 'join' %}" class="acc-element">Join us</a>
+    </div>
+</div>
+<form class="acc-form p-3" method="post" novalidate>{% csrf_token %}
+    <div class="mb-3">
+        <label class="input-title" for="{{ form.email.id_for_label }}">E-mail</label>
+        {{ form.email }}
+        {% if form.email.errors %}
+        <div class="invalid-feedback d-block">{{ form.email.errors|striptags }}</div>
+        {% endif %}
+    </div>
+    <div>
+        <label class="input-title" for="{{ form.password.id_for_label }}">Password</label>
+        {{ form.password }}
+        {% if form.password.errors %}
+        <div class="invalid-feedback d-block">{{ form.password.errors|striptags }}</div>
+        {% endif %}
+    </div>
+    <a href="{% url 'generate-email' %}" class="form-text float-end pt-1">Forgot my password 🤡</a>
+    <hr class="mt-5">
+    {% if form.non_field_errors %}
+    <div class="invalid-feedback d-block">{{ form.non_field_errors|striptags }}</div>
+    {% endif %}
+    <button class="button-acc w-100 p-2" type="submit">Log In</button>
+</form>
+
+{% endblock content %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load custom_tags %}
+
+{% block content %}
+
+<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 inner">
+    <div class="col">
+        {% for post in posts %}
+        {% if post.visible %}
+        <div>
+            <p> {{ post.date|date:"G:i F d, Y" }} </p>
+            <a href="{% url 'account-view' post.author.id %}"> {{ post.author.first_name }} </a>
+            <h1> {{ post.title }} </h1>
+            <a href="{% url 'post-details' post.id %}">Details</a>
+            {% if post.image %}
+            <img src="{{ '/media/'|addstr:post.image }}" style="width: 100px">
+            {% endif %}
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="{{ '#post_options'|addstr:post.id }}">
+                Options
+            </button>
+            <div class="modal fade" id="{{ 'post_options'|addstr:post.id }}" tabindex="-1" aria-labelledby="post_options_label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="d-grid gap-2 py-3">  
+                                {% if request.user != post.author %}
+                                <a href='{% url 'report-post' post.id %}' type="button" class="btn btn-white shadow-none text-danger">Report</a>
+                                <hr>
+                                {% endif %}
+                                <button onclick="copyLink('{{ post.title|slugify|addstr:'-link' }}')" type="button" class="btn btn-white shadow-none">Copy link </button>
+                                <hr>
+                                <button class="btn btn-white shadow-none" data-bs-dismiss="modal" aria-label="Close">Close</button>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}
+

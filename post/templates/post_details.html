@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load custom_tags %}
+{% load humanize %}
+
+{% block content %}
+
+<div class="inner py-3">
+    <h5 class="">{{ context.post.category }}</h5>
+    <div class="overflow-hidden">
+        <div class="row gy-5 row-cols-2">
+            {% if context.post.image %}
+            <div class="col-md-7 col-12">
+                <div class="columns border">
+                    <img class='details-img' src="{{ '/media/'|addstr:context.post.image }}">
+                </div>
+            </div>
+            <div class="col-md-5 col-12">
+            {% else %}
+            <div class="col-12">
+            {% endif %}
+                <div class="p-3 columns">
+                    <h3 class="align-middle mb-0 float-start"> <a class="" href="{% url 'account-view' context.post.author.id %}">{{ context.post.author.first_name }}</a>
+                        <div class="last-login pt-1">Last online: {{ context.post.author.last_login|date:'d F o, G:i' }}</div>
+                    </h3>
+                        <div class="float-end pt-2">
+                            {% if context.post.author.display_phone %}
+                            <span id="phone_number" class="call-author px-4 py-2 align-middle">Call</span>
+                            {% endif %}
+                        </div>
+                </div>
+                <div class="p-3 columns my-4">
+                    <div class="p-0 m-0">
+                        <p class="float-end input-title"> {{ context.post.date_created|time_since }} </p>
+                    </div>
+                    <div class="post-details-title">
+                        <h1> {{ context.post.title }} </h1>
+                    </div>
+                    <div class="py-3">
+                        <span class="input-title">What?</span>
+                        <div style="white-space: pre-line;"> {{ context.post.text}} </div>
+                    </div>
+                    <div>
+                        <span class="input-title">Where?</span>
+                        <p> {{ context.post.area}} </p>
+                    </div>
+                    <hr>
+                    <div>
+                        <div class="input-title float-start">ID: {{ context.post.id }}</div>
+                        {% if context.post.author.id == request.user.id %}
+                        <a class="float-end report" href="{% url 'edit-post' context.post.id %}">Edit</a>
+                        {% else %}
+                        <a class="float-end report" href="{% url 'report-post' context.post.id %}">Report</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% comment %} {% if context.post.image %}
+            <div class="col-md-12 col-12 pt-0"> 
+            {% else %}
+            <div class="col-md-12 col-12 pt-0 mt-0"> 
+            {% endif %}
+                <div class="columns p-3">
+                    <div class="row justify-content-between m-0">
+                        <div class="col-4 p-0">
+                            <h5>Contact with {{ context.post.author.first_name }}</h5>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                {% if context.post.author.display_phone %}
+                                <span id="phone_number" class="contact-author align-middle text-center">Show phone number</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> {% endcomment %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<script>
+    $('#phone_number').on('click', function() {
+        $('#phone_number').replaceWith(('<a class="call-author px-4 py-2 align-middle" href="tel:{{ context.post.author.isd_code|addstr:context.post.author.phone_number }}">{{ context.post.author.isd_code|addstr:" "|addstr:context.post.author.phone_number }}</a>'));
+    });
+</script>
+{% endblock script %}
+

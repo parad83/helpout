@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="inner">
+    {{form.ul}}
+    <h2 class="py-3"><strong>Add post</strong></h2>
+    <form class="add-post overflow-hidden mb-4" enctype="multipart/form-data" method="POST" novalidate>{% csrf_token %}
+        <div class="row gy-5">
+            <div class="col-lg-7 col-12 main-col">
+                <div class="px-5 pb-5 pt-3 columns">
+                    <label class="input-title" for="{{ form.image.id_for_label }}">Optional photo</label>
+                    <div class="d-flex align-items-center justify-content-center image-input mx-auto d-block">
+                        <span class="fs-1 align-middle">
+                            +
+                        </span>
+                    </div>
+                    <div class="visually-hidden">
+                        {{ form.image }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-12 main-col">
+                <div class="p-3 columns overflow-auto">
+                    <div class="pb-3">
+                        <label class="input-title" for="{{ form.type.id_for_label }}">Select proper description</label>
+                        <div class="pt-1" id="radio-select">
+                            {% for radio in form.type %}
+                            {{ radio }}
+                            {% endfor %}
+                        </div>
+                        <span class="invalid-feedback d-block ps-1">{{ form.type.errors|striptags }}</span>
+                    </div>
+                    <div class="pb-3">
+                        <label class="input-title" for="{{ form.category.id_for_label }}">Category which best fits your post</label>
+                        {{ form.category }}
+                        <span class="invalid-feedback d-block ps-1">{{ form.category.errors|striptags }}</span>
+                    </div>
+                    <div class"pb-3">
+                        <label class="input-title" for="{{ form.title.id_for_label }}">Title for the post</label>
+                        {{ form.title }}
+                        <span class="invalid-feedback d-block ps-1">{{ form.title.errors|striptags }}</span>
+                    </div>
+                    <div class="pt-3">
+                        <label class="input-title" for="{{ form.text.id_for_label }}">Description for what You look for/You can offer</label>
+                        {{ form.text }}
+                        <span class="invalid-feedback d-block ps-1">{{ form.text.errors|striptags }}</span>
+                    </div>
+                    <div class="py-3">
+                        <label class="input-title" for="{{ form.area.id_for_label }}">Area in which You can operate</label>
+                        <div id="area-results" class="post-area-list">
+                            <ul id="area-results-list" class="list-group text-start"></ul>
+                            <ul id="area-init-results-list" class="list-group text-start">
+                                <li class="list-group-item border-bottom-3">
+                                    <strong> Cała Polska </strong>
+                                </li>
+                                <li class="list-group-item">
+                                    Dolnośląskie
+                                </li>
+                                <li class="list-group-item">
+                                    Kujawsko-pomorskie
+                                </li>
+                                <li class="list-group-item">
+                                    Lubelskie
+                                </li>
+                                <li class="list-group-item">
+                                    Lubuskie
+                                </li>
+                                <li class="list-group-item">
+                                    Łódzkie
+                                </li>
+                                <li class="list-group-item">
+                                    Małopolskie
+                                </li>
+                                <li class="list-group-item">
+                                    Mazowieckie
+                                </li>
+                                <li class="list-group-item">
+                                    Opolskie
+                                </li>
+                                <li class="list-group-item">
+                                    Podkarpackie
+                                </li>
+                                <li class="list-group-item">
+                                    Podlaskie
+                                </li>
+                                <li class="list-group-item">
+                                    Pomorskie
+                                </li>
+                                <li class="list-group-item">
+                                    Śląskie
+                                </li>
+                                <li class="list-group-item">
+                                    Świętokrzyskie
+                                </li>
+                                <li class="list-group-item">
+                                    Warmińsko-mazurskie
+                                </li>
+                                <li class="list-group-item">
+                                    Wielkopolskie
+                                </li>
+                                <li class="list-group-item">
+                                    Zachodniopomorskie
+                                </li>
+                            </ul>
+                        </div>
+                        {{ form.area }}
+                        <span class="invalid-feedback d-block ps-1">{{ form.area.errors|striptags }}</span>
+                    </div>
+                    <button type="submit" class="button py-2 px-3">Add</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<script>
+    $('#radio-select label').addClass('pe-3');
+</script>
+{% endblock script %}

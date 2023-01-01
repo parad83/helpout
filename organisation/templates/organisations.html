@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load custom_tags %}
+
+{% block content %}
+
+
+{% for org in organisations %}
+
+<div>
+    <hr>
+    <a href="{% url 'organisation-details' org.slug %}"> {{ org.name }} </a>
+    <p> {{ org.biography }} </p>
+    <a href="{{ org.website }}"> {{ org.website }} </a>
+    
+    <img src="{{ '/media/'|addstr:org.image }}" style="width: 100px">
+    <hr>
+</div>
+
+{% endfor %}
+
+
+{% endblock %}

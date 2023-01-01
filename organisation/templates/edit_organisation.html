@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load custom_tags %}
+
+{% block content %}
+<img src="{{ '/media/'|addstr:img }}" style="width: 100px">
+<form action="" enctype="multipart/form-data" method="POST">{% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Submit</button>
+</form>
+
+
+{% endblock content %}
