@@ -24,3 +24,5 @@ urlpatterns = [
     path('api/', include('api.urls')),
     path('report/', include('report.urls')),
 ]
+
+handler404 = "ia.views.page_not_found_view"
