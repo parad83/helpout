@@ -29,8 +29,9 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: var(--color-light);
     display: flex;
+    flex-direction: column;;
     min-height: 100vh;
-    flex-direction: column;
+    justify-content: flex-end;
 }
 
 ::selection {
@@ -68,12 +69,13 @@ input{
 
 .main-nav {
     height: 11vh;
+    width: 100vw;
     font-size: 1.25rem;
     animation: forwards 0.1s;
     position: fixed;
     top: 0;
     transition: 0.5s;
-    background-color: var(--color-1);
+    background-color: var(--color-5);
     z-index: 999;
 }
 
@@ -125,10 +127,10 @@ input{
 .bottom-nav {
     position: fixed;
     bottom: 0;
-    height: 46px;
+    height: 50px;
     z-index: 9999;
-    background-color: var(--color-1);
-    width: 100%;
+    background-color: var(--color-5);
+    width: 100vw !important;
     display: flex;
     align-items: center;
     animation: backwards 0.3s;
@@ -153,7 +155,7 @@ input{
 
 .new-nav-mob {
     transform: translateY(-5vh);
-    background-color: var(--color-1) !important;
+    background-color: var(--color-5) !important;
 }
 
 .new-bottom-nav {
@@ -163,7 +165,7 @@ input{
 }
 
 .new-nav {
-    height: 9vh !important;
+    height: 8vh !important;
     background-color: var(--color-5) !important;
     transition: 0.5s;
     animation: forwards 0.1s;
@@ -175,7 +177,8 @@ input{
 }
 
 main {
-    margin-top: 100px;
+    margin-bottom: auto;
+    margin-top: 110px;
 }
 
 a {
@@ -669,7 +672,6 @@ i {
 .button-delete {
     background-color: var(--color-white);
     transition: 0.2s;
-    float: right;
     border: red 1px solid !important;
     color: var(--text-color-3);
     border-radius: 3px;
@@ -707,7 +709,7 @@ i {
 
 
 .page {
-    height: 100vh;
+    height: 100%;
     background-color: var(--color-2);
     /* text-align: center; */
 }
@@ -759,22 +761,37 @@ img {
 }
 
 footer {
-    background-color: var(--color-1);
-    color: var(--text-color-1);
-    position: relative;
+    background-color: var(--color-5);
+    color: var(--text-color-1) !important;
     height: auto;
-    bottom: 0;
     width: 100%;
-    margin-top: auto;
+    margin-bottom: auto !important;
+    align-self: flex-end; 
+}
+
+footer ul{
+    list-style-type: none;
+}
+
+footer a{
+    color: var(--text-color-1) !important;
+    opacity: 80%;
 }
 
 .copyright {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    float: left;
     opacity: 70%;
     font-size: 0.7rem;
+}
+
+.tos {
+    opacity: 80%;
+    font-size: 0.8rem;
+    text-decoration: underline;
+}
+
+.contact {
+    opacity: 80%;
+    font-size: 1rem;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -954,5 +971,41 @@ input[type='radio']:checked {
 
 .support-page {
     background-color: var(--color-2);
-    width: 100%;
+    color: var(--text-color-1) !important;
+}
+
+.support-title {
+    color: var(--text-color-1);
+    font-size: 1.7rem;
+    letter-spacing: 0.02rem;
+    font-weight: bold;
+}
+
+.join-message {
+    white-space: pre-line !important;
+}
+
+.about-body {
+    font-size: 1.2rem;
+    font-weight: bolder;
+    color: var(--text-color-2);
+}
+
+.faq-expand:hover, .faq-expand:focus {
+    color: var(--text-color-1);
+    background-color: var(--color-1);
+}
+
+.faq-expand {
+    color: var(--text-color-1);;
+}
+
+.faq-ans {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--text-color-2);
+}
+
+.bottom-nav i {
+    font-size: 1.2rem;
 }

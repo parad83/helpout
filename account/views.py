@@ -87,7 +87,7 @@ def signup_view(request):
         account.id = post.views.idExists(shortuuid.ShortUUID(alphabet="0123456789").random(length=10))
         account.save()
         login(request, account)
-        return redirect(reverse('edit-account'))
+        return redirect(reverse('join-message'))
     return render(request, 'signup.html', {'form': form})
 
 
@@ -138,3 +138,20 @@ def edit_account(request):
     else:
         form = forms.EditUserForm(initial={'first_name': request.user.first_name, 'isd_code': request.user.isd_code, 'phone_number': request.user.phone_number, 'display_phone': request.user.display_phone})
     return render(request, 'edit_account.html', {'form': form})
+
+@login_required()
+def join_message(request):
+    name = request.user.first_name
+    return render(request, 'join_message.html', {'name': name})
+
+def tos(request):
+    return render(request, 'tos.html')
+
+def privacy_policy(request):
+    return render(request, 'privacy_policy.html')
+
+@login_required()
+def delete_account(request):
+    request.user.delete()
+    messages.add_message(request, messages.INFO, 'Account has been deleted successfully.')
+    return redirect(reverse('home'))

@@ -22,7 +22,7 @@
         {% endif %}
     </div>
     <div class="mb-3">
-        <label class="input-title" for="{{ form.email.id_for_label }}">E-mail</label>
+        <label class="input-title" for="{{ form.email.id_for_label }}">Email</label>
         {{ form.email }}
         {% if form.email.errors %}
         <div class="invalid-feedback d-block">{{ form.email.errors|striptags }}</div>
@@ -46,7 +46,7 @@
     </div>
     <div class="form-check form-text">
         {{ form.accepts_tos }}
-        <label class="form-check-label tos" for="{{ form.accepts_tos.id_for_label }}">I agree to <a href="#"> Terms and Conditions </a> </label>
+        <label class="form-check-label tos" for="{{ form.accepts_tos.id_for_label }}">I agree to <a href="{% url 'tos' %}"> Terms of Service </a> </label>
         {% if form.accepts_tos.errors %}
         <div class="invalid-feedback d-block">{{ form.accepts_tos.errors|striptags }}</div>
         {% endif %}

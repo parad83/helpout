@@ -94,7 +94,8 @@ class JoinForm(UserCreationForm):
             'password1': {
                 'required': ("Oops, you forgot to enter password confirmation!"),
                 'invalid': ("Ey, that's not a valid email address!")
-            },     
+            },    
+             
         }
     accepts_tos = forms.CharField(required=True, widget=forms.CheckboxInput(
         attrs={
@@ -114,7 +115,13 @@ class JoinForm(UserCreationForm):
         }
         
     def clean(self):
-        pass
+        cleaned_data = super().clean()
+        email = cleaned_data.get('email')
+        
+        if get_user_model().objects.filter(email=email).exists():
+            raise forms.ValidationError({'email': ["Account with this email already exists"]})
+        
+        return cleaned_data
     
     
 class LoginForm(forms.ModelForm):    

@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     'report',
     'organisation',
     'api',
-    'help'
 ]
 
 MIDDLEWARE = [
