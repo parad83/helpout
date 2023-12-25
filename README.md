@@ -1,3 +1,3 @@
-# cs-ia
+# helpout.cc
 
-Code for my IB M23 Computer Science Internal Assessment 
+Craiglist-like website connecting people in need and people who are able to offer help. 
